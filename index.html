@@ -429,75 +429,9 @@
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
-function applyProjectFilters() {
-    const nameFilter = document.getElementById('projectNameFilter').value.toLowerCase();
-    const employeeId = parseInt(document.getElementById('employeeFilter').value);
-    const rows = document.querySelectorAll('#projects-table tbody tr');
-    rows.forEach(row => {
-        const projectName = row.children[0].textContent.toLowerCase();
-        const teamCount = parseInt(row.children[8]?.textContent || 0);
-        let match = true;
-        if (nameFilter && !projectName.includes(nameFilter)) match = false;
-        if (employeeId && (!row.dataset.team || !row.dataset.team.includes(String(employeeId)))) match = false;
-        row.style.display = match ? '' : 'none';
-    });
-}
-
-function exportProjectsToExcel() {
-    let table = document.getElementById('projects-table');
-    let wb = XLSX.utils.table_to_book(table, { sheet: "Projekte" });
-    XLSX.writeFile(wb, "Projekte.xlsx");
-}
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const filter = document.getElementById('employeeFilter');
-    employees.forEach(e => {
-        const opt = document.createElement('option');
-        opt.value = e.id;
-        opt.textContent = e.name;
-        filter.appendChild(opt);
-    });
-});
-
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js">
-function applyProjectFilters() {
-    const nameFilter = document.getElementById('projectNameFilter').value.toLowerCase();
-    const employeeId = parseInt(document.getElementById('employeeFilter').value);
-    const rows = document.querySelectorAll('#projects-table tbody tr');
-    rows.forEach(row => {
-        const projectName = row.children[0].textContent.toLowerCase();
-        const teamCount = parseInt(row.children[8]?.textContent || 0);
-        let match = true;
-        if (nameFilter && !projectName.includes(nameFilter)) match = false;
-        if (employeeId && (!row.dataset.team || !row.dataset.team.includes(String(employeeId)))) match = false;
-        row.style.display = match ? '' : 'none';
-    });
-}
-
-function exportProjectsToExcel() {
-    let table = document.getElementById('projects-table');
-    let wb = XLSX.utils.table_to_book(table, { sheet: "Projekte" });
-    XLSX.writeFile(wb, "Projekte.xlsx");
-}
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const filter = document.getElementById('employeeFilter');
-    employees.forEach(e => {
-        const opt = document.createElement('option');
-        opt.value = e.id;
-        opt.textContent = e.name;
-        filter.appendChild(opt);
-    });
-});
-
-</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -567,10 +501,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         <h2>Task të fundit</h2>
                         <a href="#" data-section="tasks">Shiko të gjitha</a>
                     </div>
-                    
-    <div class="card-body">
-        <input type="text" class="form-control" placeholder="Filtro Task..." onkeyup="filterTable(this, 'recent-tasks-table')">
-<table class="table" id="recent-tasks-table">
+                    <div class="card-body">
+                        <input type="text" class="form-control" placeholder="Filtro Task..." onkeyup="filterTable(this, 'recent-tasks-table')">
+                        <table class="table" id="recent-tasks-table">
                             <thead>
                                 <tr>
                                     <th>Titulli</th>
@@ -594,7 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="card-body">
                         <input type="text" class="form-control" placeholder="Filtro Projekte..." onkeyup="filterTable(this, 'active-projects-table')">
-<table class="table" id="active-projects-table">
+                        <table class="table" id="active-projects-table">
                             <thead>
                                 <tr>
                                     <th>Emri</th>
@@ -603,12 +536,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <th>Data e përfundimit</th>
                                     <th>Përparësi</th>
                                     <th>Vlera (€)</th>
-</tr>
+                                </tr>
                             </thead>
                             <tbody>
                                 <!-- Active projects will be loaded here -->
-    
-    
                             </tbody>
                         </table>
                     </div>
@@ -641,7 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         
                         <div class="tab-content active" id="all-tasks">
                             <input type="text" class="form-control" placeholder="Filtro Task..." onkeyup="filterTable(this, 'all-tasks-table')">
-<table class="table" id="all-tasks-table">
+                            <table class="table" id="all-tasks-table">
                                 <thead>
                                     <tr>
                                         <th>Titulli</th>
@@ -660,7 +591,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         
                         <div class="tab-content" id="pending-tasks">
                             <input type="text" class="form-control" placeholder="Filtro Task..." onkeyup="filterTable(this, 'pending-tasks-table')">
-<table class="table" id="pending-tasks-table">
+                            <table class="table" id="pending-tasks-table">
                                 <thead>
                                     <tr>
                                         <th>Titulli</th>
@@ -679,7 +610,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         
                         <div class="tab-content" id="inprogress-tasks">
                             <input type="text" class="form-control" placeholder="Filtro Task..." onkeyup="filterTable(this, 'inprogress-tasks-table')">
-<table class="table" id="inprogress-tasks-table">
+                            <table class="table" id="inprogress-tasks-table">
                                 <thead>
                                     <tr>
                                         <th>Titulli</th>
@@ -698,7 +629,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         
                         <div class="tab-content" id="completed-tasks">
                             <input type="text" class="form-control" placeholder="Filtro Task..." onkeyup="filterTable(this, 'completed-tasks-table')">
-<table class="table" id="completed-tasks-table">
+                            <table class="table" id="completed-tasks-table">
                                 <thead>
                                     <tr>
                                         <th>Titulli</th>
@@ -734,8 +665,23 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="tab" data-tab="Mbyllur (Fituar)">Fituar</div>
                             <div class="tab" data-tab="Mbyllur (Humbur)">Humbur</div>
                         </div>
+                        
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="projectNameFilter">Filtro sipas emrit:</label>
+                                <input type="text" id="projectNameFilter" class="form-control" placeholder="Emri i projektit">
+                            </div>
+                            <div class="form-group">
+                                <label for="employeeFilter">Filtro sipas punonjësit:</label>
+                                <select id="employeeFilter" class="form-control">
+                                    <option value="">Të gjithë punonjësit</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary" onclick="applyProjectFilters()">Apliko Filtra</button>
+                            <button class="btn btn-success" onclick="exportProjectsToExcel()">Eksporto në Excel</button>
+                        </div>
+                        
                         <div class="tab-content active" id="all-projects">
-                            
                             <table class="table" id="projects-table">
                                 <thead>
                                     <tr>
@@ -754,62 +700,113 @@ document.addEventListener('DOMContentLoaded', () => {
                             </table>
                         </div>
                         <div class="tab-content" id="Prospekt">
-                            <table class="table" id="projects-phase-Prospekt"><thead><tr>
-                                <th>Emri</th><th>Klienti</th><th>Data e fillimit</th><th>Data e përfundimit</th>
-                                <th>Përparësi</th><th>Faza</th><th>Statusi</th><th>Vlera (€)</th><th>Veprime</th>
-                            </tr></thead><tbody></tbody></table>
+                            <table class="table" id="projects-phase-Prospekt">
+                                <thead>
+                                    <tr>
+                                        <th>Emri</th>
+                                        <th>Klienti</th>
+                                        <th>Data e fillimit</th>
+                                        <th>Data e përfundimit</th>
+                                        <th>Përparësi</th>
+                                        <th>Faza</th>
+                                        <th>Statusi</th>
+                                        <th>Vlera (€)</th>
+                                        <th>Veprime</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
                         </div>
                         <div class="tab-content" id="Kualifikim">
-                            <table class="table" id="projects-phase-Kualifikim"><thead><tr>
-                                <th>Emri</th><th>Klienti</th><th>Data e fillimit</th><th>Data e përfundimit</th>
-                                <th>Përparësi</th><th>Faza</th><th>Statusi</th><th>Vlera (€)</th><th>Veprime</th>
-                            </tr></thead><tbody></tbody></table>
+                            <table class="table" id="projects-phase-Kualifikim">
+                                <thead>
+                                    <tr>
+                                        <th>Emri</th>
+                                        <th>Klienti</th>
+                                        <th>Data e fillimit</th>
+                                        <th>Data e përfundimit</th>
+                                        <th>Përparësi</th>
+                                        <th>Faza</th>
+                                        <th>Statusi</th>
+                                        <th>Vlera (€)</th>
+                                        <th>Veprime</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
                         </div>
                         <div class="tab-content" id="Propozim">
-                            <table class="table" id="projects-phase-Propozim"><thead><tr>
-                                <th>Emri</th><th>Klienti</th><th>Data e fillimit</th><th>Data e përfundimit</th>
-                                <th>Përparësi</th><th>Faza</th><th>Statusi</th><th>Vlera (€)</th><th>Veprime</th>
-                            </tr></thead><tbody></tbody></table>
+                            <table class="table" id="projects-phase-Propozim">
+                                <thead>
+                                    <tr>
+                                        <th>Emri</th>
+                                        <th>Klienti</th>
+                                        <th>Data e fillimit</th>
+                                        <th>Data e përfundimit</th>
+                                        <th>Përparësi</th>
+                                        <th>Faza</th>
+                                        <th>Statusi</th>
+                                        <th>Vlera (€)</th>
+                                        <th>Veprime</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
                         </div>
                         <div class="tab-content" id="Negociim">
-                            <table class="table" id="projects-phase-Negociim"><thead><tr>
-                                <th>Emri</th><th>Klienti</th><th>Data e fillimit</th><th>Data e përfundimit</th>
-                                <th>Përparësi</th><th>Faza</th><th>Statusi</th><th>Vlera (€)</th><th>Veprime</th>
-                            </tr></thead><tbody></tbody></table>
+                            <table class="table" id="projects-phase-Negociim">
+                                <thead>
+                                    <tr>
+                                        <th>Emri</th>
+                                        <th>Klienti</th>
+                                        <th>Data e fillimit</th>
+                                        <th>Data e përfundimit</th>
+                                        <th>Përparësi</th>
+                                        <th>Faza</th>
+                                        <th>Statusi</th>
+                                        <th>Vlera (€)</th>
+                                        <th>Veprime</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
                         </div>
                         <div class="tab-content" id="Mbyllur (Fituar)">
-                            <table class="table" id="projects-phase-Mbyllur-Fituar"><thead><tr>
-                                <th>Emri</th><th>Klienti</th><th>Data e fillimit</th><th>Data e përfundimit</th>
-                                <th>Përparësi</th><th>Faza</th><th>Statusi</th><th>Vlera (€)</th><th>Veprime</th>
-                            </tr></thead><tbody></tbody></table>
+                            <table class="table" id="projects-phase-Mbyllur-Fituar">
+                                <thead>
+                                    <tr>
+                                        <th>Emri</th>
+                                        <th>Klienti</th>
+                                        <th>Data e fillimit</th>
+                                        <th>Data e përfundimit</th>
+                                        <th>Përparësi</th>
+                                        <th>Faza</th>
+                                        <th>Statusi</th>
+                                        <th>Vlera (€)</th>
+                                        <th>Veprime</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
                         </div>
                         <div class="tab-content" id="Mbyllur (Humbur)">
-                            <table class="table" id="projects-phase-Mbyllur-Humbur"><thead><tr>
-                                <th>Emri</th><th>Klienti</th><th>Data e fillimit</th><th>Data e përfundimit</th>
-                                <th>Përparësi</th><th>Faza</th><th>Statusi</th><th>Vlera (€)</th><th>Veprime</th>
-                            </tr></thead><tbody></tbody></table>
+                            <table class="table" id="projects-phase-Mbyllur-Humbur">
+                                <thead>
+                                    <tr>
+                                        <th>Emri</th>
+                                        <th>Klienti</th>
+                                        <th>Data e fillimit</th>
+                                        <th>Data e përfundimit</th>
+                                        <th>Përparësi</th>
+                                        <th>Faza</th>
+                                        <th>Statusi</th>
+                                        <th>Vlera (€)</th>
+                                        <th>Veprime</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        
-<table class="table" id="projects-table">
-                            <thead>
-                                <tr>
-                                    <th>Emri</th>
-                                    <th>Klienti</th>
-                                    <th>Data e fillimit</th>
-                                    <th>Data e përfundimit</th>
-                                    <th>Përparësi</th>
-                                    <th>Faza</th>
-                                    <th>Statusi</th>
-                                    <th>Vlera (€)</th>
-<th>Veprime</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Projects will be loaded here -->
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </section>
@@ -822,7 +819,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="card-body">
                         <input type="text" class="form-control" placeholder="Filtro Klient..." onkeyup="filterTable(this, 'clients-table')">
-<table class="table" id="clients-table">
+                        <table class="table" id="clients-table">
                             <thead>
                                 <tr>
                                     <th>Emri</th>
@@ -850,7 +847,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="card-body">
                         <input type="text" class="form-control" placeholder="Filtro Punonjës..." onkeyup="filterTable(this, 'employees-table')">
-<table class="table" id="employees-table">
+                        <table class="table" id="employees-table">
                             <thead>
                                 <tr>
                                     <th>Emri</th>
@@ -908,7 +905,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         
                         <div class="tab-content active" id="tasks-report">
-<button class="btn btn-success" onclick="exportTableToPDF('all-tasks-table', 'Raporti i Taskëve')">Eksporto Task PDF</button>
+                            <button class="btn btn-success" onclick="exportTableToPDF('all-tasks-table', 'Raporti i Taskëve')">Eksporto Task PDF</button>
                             <div class="form-group">
                                 <label for="task-report-period">Periudha:</label>
                                 <select id="task-report-period" class="form-control">
@@ -937,7 +934,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         
                         <div class="tab-content" id="projects-report">
-<button class="btn btn-success" onclick="exportTableToPDF('projects-table', 'Raporti i Projekteve')">Eksporto Projekte PDF</button>
+                            <button class="btn btn-success" onclick="exportTableToPDF('projects-table', 'Raporti i Projekteve')">Eksporto Projekte PDF</button>
                             <div class="form-group">
                                 <label for="project-report-period">Periudha:</label>
                                 <select id="project-report-period" class="form-control">
@@ -966,7 +963,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         
                         <div class="tab-content" id="clients-report">
-<button class="btn btn-success" onclick="exportTableToPDF('clients-table', 'Raporti i Klientëve')">Eksporto Klientë PDF</button>
+                            <button class="btn btn-success" onclick="exportTableToPDF('clients-table', 'Raporti i Klientëve')">Eksporto Klientë PDF</button>
                             <div class="form-group">
                                 <label for="client-report-period">Periudha:</label>
                                 <select id="client-report-period" class="form-control">
@@ -989,13 +986,14 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                             <button class="btn btn-primary" id="generate-client-report">Gjenero raportin</button>
                             
-                            <div id="client-report-results" style="margin-top: 20px;">
+                            <div id="client-report-results" style="
+                                                        <div id="client-report-results" style="margin-top: 20px;">
                                 <!-- Client report results will be shown here -->
                             </div>
                         </div>
                         
                         <div class="tab-content" id="employees-report">
-<button class="btn btn-success" onclick="exportTableToPDF('employees-table', 'Raporti i Punonjësve')">Eksporto Punonjës PDF</button>
+                            <button class="btn btn-success" onclick="exportTableToPDF('employees-table', 'Raporti i Punonjësve')">Eksporto Punonjës PDF</button>
                             <div class="form-group">
                                 <label for="employee-report-period">Periudha:</label>
                                 <select id="employee-report-period" class="form-control">
@@ -1045,7 +1043,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="form-group">
                         <label for="task-team">Grupi i punës:</label>
                         <select id="task-team" class="form-control"></select>
-<div id="task-team-list" class="form-group" style="margin-top:10px;"></div>
+                        <div id="task-team-list" class="form-group" style="margin-top:10px;"></div>
                         <select id="task-employee" class="form-control">
                             <option value="">Zgjidh punonjësin</option>
                         </select>
@@ -1067,12 +1065,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         </select>
                     </div>
                     
-    <div class="form-group">
-        <label for="task-documents">Dokumente Task:</label>
-        <input type="file" id="task-documents" class="form-control" multiple>
-    </div>
-    <div class="form-group">
-        <label for="task-due-date">Data e përfundimit:</label>
+                    <div class="form-group">
+                        <label for="task-documents">Dokumente Task:</label>
+                        <input type="file" id="task-documents" class="form-control" multiple>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-due-date">Data e përfundimit:</label>
                         <input type="date" id="task-due-date" class="form-control">
                     </div>
                 </div>
@@ -1098,7 +1096,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="form-group">
                         <label for="project-team">Grupi i punës:</label>
                         <select id="project-team" class="form-control"></select>
-<div id="project-team-list" class="form-group" style="margin-top:10px;"></div>
+                        <div id="project-team-list" class="form-group" style="margin-top:10px;"></div>
                         <select id="project-manager" class="form-control">
                             <option value="">Zgjidh menaxherin</option>
                         </select>
@@ -1140,12 +1138,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         </select>
                     </div>
                     
-    <div class="form-group">
-        <label for="project-documents">Dokumente Projekti:</label>
-        <input type="file" id="project-documents" class="form-control" multiple>
-    </div>
-    <div class="form-group">
-        <label for="project-value">Vlera (€):</label>
+                    <div class="form-group">
+                        <label for="project-documents">Dokumente Projekti:</label>
+                        <input type="file" id="project-documents" class="form-control" multiple>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-value">Vlera (€):</label>
                         <input type="number" id="project-value" class="form-control" min="0" step="0.01">
                     </div>
                 </div>
@@ -1325,13 +1323,16 @@ document.addEventListener('DOMContentLoaded', () => {
             updateDashboardStats();
             
             // Load recent tasks and projects
-    populateGroupSelectors();
-    loadUpcomingEvents();
+            populateGroupSelectors();
+            loadUpcomingEvents();
             loadRecentTasks();
             loadActiveProjects();
             
             // Initialize calendar
             generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+            
+            // Populate employee filter dropdown
+            populateEmployeeFilter();
         }
         
         // Load sample data
@@ -1418,7 +1419,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     phase: 'Negociim',
                     status: 'inprogress',
                     value: 10000,
-        team: [1, 2]
+                    team: [1, 2]
                 },
                 {
                     id: 2,
@@ -1522,6 +1523,18 @@ document.addEventListener('DOMContentLoaded', () => {
             ];
         }
         
+        // Populate employee filter dropdown
+        function populateEmployeeFilter() {
+            const employeeFilter = document.getElementById('employeeFilter');
+            employeeFilter.innerHTML = '<option value="">Të gjithë punonjësit</option>';
+            employees.forEach(employee => {
+                const option = document.createElement('option');
+                option.value = employee.id;
+                option.textContent = employee.name;
+                employeeFilter.appendChild(option);
+            });
+        }
+        
         // Set up event listeners
         function setupEventListeners() {
             // Sidebar navigation
@@ -1623,6 +1636,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         content.classList.remove('active');
                     });
                     document.getElementById(tabId).classList.add('active');
+                    
+                    // If projects tab, apply filters
+                    if (currentSection === 'projects') {
+                        applyProjectFilters();
+                    }
                 });
             });
             
@@ -1706,6 +1724,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     break;
                 case 'projects':
                     loadAllProjects();
+                    document.querySelector('.tab[data-tab="all-projects"]').click();
                     break;
                 case 'clients':
                     loadAllClients();
@@ -2241,187 +2260,6 @@ document.addEventListener('DOMContentLoaded', () => {
             addNewModal.style.display = 'flex';
         }
         
-        
-function loadUpcomingEvents() {
-    const list = document.getElementById('task-notifications-list');
-    list.innerHTML = '';
-    const now = new Date();
-    const threeDaysLater = new Date();
-    threeDaysLater.setDate(now.getDate() + 3);
-    events.forEach(event => {
-        const end = new Date(event.endDate);
-        if (end >= now && end <= threeDaysLater) {
-            const li = document.createElement('li');
-            li.textContent = event.title + ' - përfundon më: ' + formatDateTimeForDisplay(event.endDate);
-            list.appendChild(li);
-        }
-    });
-}
-
-
-function filterTable(input, tableId) {
-    const filter = input.value.toLowerCase();
-    const rows = document.querySelectorAll(`#${tableId} tbody tr`);
-    rows.forEach(row => {
-        row.style.display = row.innerText.toLowerCase().includes(filter) ? '' : 'none';
-    });
-}
-
-
-        
-function exportTableToPDF(tableId, title) {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    doc.setFontSize(18);
-    doc.text(title, 14, 22);
-    const table = document.getElementById(tableId);
-    if (!table) {
-        alert("Tabela nuk u gjet.");
-        return;
-    }
-    const headers = [];
-    table.querySelectorAll("thead th").forEach(th => headers.push(th.innerText));
-    const data = [];
-    table.querySelectorAll("tbody tr").forEach(tr => {
-        const row = [];
-        tr.querySelectorAll("td").forEach(td => row.push(td.innerText));
-        if (row.length) data.push(row);
-    });
-    doc.autoTable({
-        head: [headers],
-        body: data,
-        startY: 30,
-        styles: { fontSize: 10 }
-    });
-    doc.save(title + ".pdf");
-}
-
-
-        
-function populateGroupSelectors() {
-    const projectTeamSelect = document.getElementById('project-team');
-    const taskTeamSelect = document.getElementById('task-team');
-    const projectList = document.getElementById('project-team-list');
-    const taskList = document.getElementById('task-team-list');
-
-    window.projectTeam = [];
-    window.taskTeam = [];
-
-    function createBadge(name, id, listContainer, teamArray) {
-        if (teamArray.includes(id)) return;
-        const badge = document.createElement('span');
-        badge.className = 'badge badge-primary';
-        badge.textContent = name + ' ×';
-        badge.style.cursor = 'pointer';
-        badge.style.marginRight = '5px';
-        badge.onclick = () => {
-            listContainer.removeChild(badge);
-            const idx = teamArray.indexOf(id);
-            if (idx !== -1) teamArray.splice(idx, 1);
-        };
-        listContainer.appendChild(badge);
-        teamArray.push(id);
-    }
-
-    // Fill selects
-    projectTeamSelect.innerHTML = '<option value="">Zgjidh punonjësin</option>';
-    taskTeamSelect.innerHTML = '<option value="">Zgjidh punonjësin</option>';
-    employees.filter(e => e.status === 'active').forEach(emp => {
-        const opt1 = document.createElement('option');
-        opt1.value = emp.id;
-        opt1.textContent = emp.name;
-        const opt2 = opt1.cloneNode(true);
-        projectTeamSelect.appendChild(opt1);
-        taskTeamSelect.appendChild(opt2);
-    });
-
-    projectTeamSelect.onchange = () => {
-        const id = parseInt(projectTeamSelect.value);
-        if (!id) return;
-        const emp = employees.find(e => e.id === id);
-        if (emp) createBadge(emp.name, emp.id, projectList, projectTeam);
-        projectTeamSelect.value = '';
-    };
-
-    taskTeamSelect.onchange = () => {
-        const id = parseInt(taskTeamSelect.value);
-        if (!id) return;
-        const emp = employees.find(e => e.id === id);
-        if (emp) createBadge(emp.name, emp.id, taskList, taskTeam);
-        taskTeamSelect.value = '';
-    };
-}
-
-
-        // Delete data
-        function deleteData(type, id) {
-            switch(type) {
-                case 'task':
-                    tasks = tasks.filter(t => t.id !== id);
-                    if (currentSection === 'tasks') {
-                        loadAllTasks();
-                    } else {
-                        loadRecentTasks();
-                    }
-                    break;
-                    
-                case 'project':
-                    // Also delete tasks associated with this project
-                    tasks = tasks.filter(t => t.projectId !== id);
-                    projects = projects.filter(p => p.id !== id);
-                    if (currentSection === 'projects') {
-                        loadAllProjects();
-                    } else {
-                        loadActiveProjects();
-                    }
-                    break;
-                    
-                case 'client':
-                    // Also delete projects and tasks associated with this client
-                    const clientProjects = projects.filter(p => p.clientId === id).map(p => p.id);
-                    tasks = tasks.filter(t => !clientProjects.includes(t.projectId));
-                    projects = projects.filter(p => p.clientId !== id);
-                    clients = clients.filter(c => c.id !== id);
-                    loadAllClients();
-                    if (currentSection === 'projects') {
-                        loadAllProjects();
-                    } else {
-                        loadActiveProjects();
-                    }
-                    break;
-                    
-                case 'employee':
-                    // Also update projects and tasks associated with this employee
-                    projects.forEach(p => {
-                        if (p.managerId === id) {
-                            p.managerId = null;
-                        }
-                    });
-                    tasks.forEach(t => {
-                        if (t.employeeId === id) {
-                            t.employeeId = null;
-                        }
-                    });
-                    employees = employees.filter(e => e.id !== id);
-                    loadAllEmployees();
-                    if (currentSection === 'projects') {
-                        loadAllProjects();
-                    } else if (currentSection === 'tasks') {
-                        loadAllTasks();
-                    }
-                    break;
-                    
-                case 'event':
-                    events = events.filter(e => e.id !== id);
-                    generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
-                    break;
-            }
-            
-            // Update dashboard stats
-            updateDashboardStats();
-            loadTaskNotifications();
-        }
-        
         // View data
         function viewData(type, id) {
             currentEditType = type;
@@ -2709,15 +2547,28 @@ function populateGroupSelectors() {
         
         // Load all projects
         function loadAllProjects() {
-            const tableBody = document.querySelector('#projects-table tbody');
-            tableBody.innerHTML = '';
+            const allProjectsTable = document.querySelector('#projects-table tbody');
+            const prospektTable = document.querySelector('#projects-phase-Prospekt tbody');
+            const kualifikimTable = document.querySelector('#projects-phase-Kualifikim tbody');
+            const propozimTable = document.querySelector('#projects-phase-Propozim tbody');
+            const negociimTable = document.querySelector('#projects-phase-Negociim tbody');
+            const fituarTable = document.querySelector('#projects-phase-Mbyllur-Fituar tbody');
+            const humburTable = document.querySelector('#projects-phase-Mbyllur-Humbur tbody');
+            
+            allProjectsTable.innerHTML = '';
+            prospektTable.innerHTML = '';
+            kualifikimTable.innerHTML = '';
+            propozimTable.innerHTML = '';
+            negociimTable.innerHTML = '';
+            fituarTable.innerHTML = '';
+            humburTable.innerHTML = '';
             
             projects.forEach(project => {
                 const client = project.clientId ? clients.find(c => c.id === project.clientId) : null;
                 const manager = project.managerId ? employees.find(e => e.id === project.managerId) : null;
                 
                 const row = `
-                    <tr>
+                    <tr data-team="${project.team ? project.team.join(',') : ''}">
                         <td>${project.name}</td>
                         <td>${client ? client.name : '-'}</td>
                         <td>${project.startDate ? formatDate(project.startDate) : '-'}</td>
@@ -2734,8 +2585,79 @@ function populateGroupSelectors() {
                     </tr>
                 `;
                 
-                tableBody.insertAdjacentHTML('beforeend', row);
+                allProjectsTable.insertAdjacentHTML('beforeend', row);
+                
+                // Add to corresponding phase table
+                switch(project.phase) {
+                    case 'Prospekt':
+                        prospektTable.insertAdjacentHTML('beforeend', row);
+                        break;
+                    case 'Kualifikim':
+                        kualifikimTable.insertAdjacentHTML('beforeend', row);
+                        break;
+                    case 'Propozim':
+                        propozimTable.insertAdjacentHTML('beforeend', row);
+                        break;
+                    case 'Negociim':
+                        negociimTable.insertAdjacentHTML('beforeend', row);
+                        break;
+                    case 'Mbyllur (Fituar)':
+                        fituarTable.insertAdjacentHTML('beforeend', row);
+                        break;
+                    case 'Mbyllur (Humbur)':
+                        humburTable.insertAdjacentHTML('beforeend', row);
+                        break;
+                }
             });
+        }
+        
+        // Apply project filters
+        function applyProjectFilters() {
+            const nameFilter = document.getElementById('projectNameFilter').value.toLowerCase();
+            const employeeId = parseInt(document.getElementById('employeeFilter').value);
+            
+            // Get all project tables
+            const projectTables = [
+                document.querySelector('#projects-table tbody'),
+                document.querySelector('#projects-phase-Prospekt tbody'),
+                document.querySelector('#projects-phase-Kualifikim tbody'),
+                document.querySelector('#projects-phase-Propozim tbody'),
+                document.querySelector('#projects-phase-Negociim tbody'),
+                document.querySelector('#projects-phase-Mbyllur-Fituar tbody'),
+                document.querySelector('#projects-phase-Mbyllur-Humbur tbody')
+            ];
+            
+            // Apply filters to each table
+            projectTables.forEach(table => {
+                if (!table) return;
+                
+                const rows = table.querySelectorAll('tr');
+                rows.forEach(row => {
+                    const projectName = row.children[0].textContent.toLowerCase();
+                    const teamData = row.getAttribute('data-team') || '';
+                    
+                    let match = true;
+                    
+                    // Filter by name
+                    if (nameFilter && !projectName.includes(nameFilter)) {
+                        match = false;
+                    }
+                    
+                    // Filter by employee
+                    if (employeeId && (!teamData || !teamData.includes(employeeId.toString()))) {
+                        match = false;
+                    }
+                    
+                    row.style.display = match ? '' : 'none';
+                });
+            });
+        }
+        
+        // Export projects to Excel
+        function exportProjectsToExcel() {
+            let table = document.getElementById('projects-table');
+            let wb = XLSX.utils.table_to_book(table, { sheet: "Projekte" });
+            XLSX.writeFile(wb, "Projekte.xlsx");
         }
         
         // Load all clients
@@ -2840,21 +2762,58 @@ function populateGroupSelectors() {
                 dayNumber.textContent = day;
                 dayElement.appendChild(dayNumber);
                 
-                // Add events for this day
+                // Get date string for this day (YYYY-MM-DD)
                 const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                
+                // Find events for this day
                 const dayEvents = events.filter(event => {
                     return event.startDate.startsWith(dateStr);
                 });
                 
-                dayEvents.forEach(event => {
-                    const eventElement = document.createElement('div');
-                    eventElement.className = 'calendar-event';
-                    eventElement.textContent = event.title;
-                    eventElement.addEventListener('click', (e) => {
+                // Find tasks with due date on this day
+                const dayTasks = tasks.filter(task => {
+                    return task.dueDate && task.dueDate.startsWith(dateStr);
+                });
+                
+                // Find projects starting or ending on this day
+                const dayProjects = projects.filter(project => {
+                    return (project.startDate && project.startDate.startsWith(dateStr)) || 
+                           (project.endDate && project.endDate.startsWith(dateStr));
+                });
+                
+                // Combine all calendar items
+                const calendarItems = [...dayEvents, ...dayTasks, ...dayProjects];
+                
+                // Add items to calendar day
+                calendarItems.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'calendar-event';
+                    
+                    // Set different colors based on item type
+                    if (item.title) { // Event
+                        itemElement.style.backgroundColor = '#4a6fa5'; // Blue
+                        itemElement.textContent = item.title;
+                    } else if (item.dueDate) { // Task
+                        itemElement.style.backgroundColor = '#28a745'; // Green
+                        itemElement.textContent = `Task: ${item.title}`;
+                    } else { // Project
+                        itemElement.style.backgroundColor = '#ffc107'; // Yellow
+                        const isStart = item.startDate && item.startDate.startsWith(dateStr);
+                        itemElement.textContent = `Projekt: ${item.name} (${isStart ? 'Fillim' : 'Përfundim'})`;
+                    }
+                    
+                    itemElement.addEventListener('click', (e) => {
                         e.stopPropagation();
-                        viewData('event', event.id);
+                        if (item.title) { // Event
+                            viewData('event', item.id);
+                        } else if (item.dueDate) { // Task
+                            viewData('task', item.id);
+                        } else { // Project
+                            viewData('project', item.id);
+                        }
                     });
-                    dayElement.appendChild(eventElement);
+                    
+                    dayElement.appendChild(itemElement);
                 });
                 
                 dayElement.addEventListener('click', () => {
@@ -3051,7 +3010,7 @@ function populateGroupSelectors() {
                             <th>Faza</th>
                             <th>Statusi</th>
                             <th>Vlera (€)</th>
-</tr>
+                        </tr>
                     </thead>
                     <tbody>
                         ${filteredProjects.map(project => {
@@ -3341,7 +3300,7 @@ function populateGroupSelectors() {
                 return dueDate > now && dueDate <= threeDaysLater;
             });
             
-            // Rendit sipas përparësisë dhe afatit
+            // Sort by priority and due date
             upcomingTasks.sort((a, b) => {
                 const priorityOrder = { high: 1, medium: 2, low: 3 };
                 if (priorityOrder[a.priority] !== priorityOrder[b.priority]) {
@@ -3363,129 +3322,198 @@ function populateGroupSelectors() {
                 list.appendChild(li);
             });
         }
+        
+        function filterTable(input, tableId) {
+            const filter = input.value.toLowerCase();
+            const rows = document.querySelectorAll(`#${tableId} tbody tr`);
+            rows.forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(filter) ? '' : 'none';
+            });
+        }
+        
+        function exportTableToPDF(tableId, title) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFontSize(18);
+            doc.text(title, 14, 22);
+            const table = document.getElementById(tableId);
+            if (!table) {
+                alert("Tabela nuk u gjet.");
+                return;
+            }
+            const headers = [];
+            table.querySelectorAll("thead th").forEach(th => headers.push(th.innerText));
+            const data = [];
+            table.querySelectorAll("tbody tr").forEach(tr => {
+                const row = [];
+                tr.querySelectorAll("td").forEach(td => row.push(td.innerText));
+                if (row.length) data.push(row);
+            });
+            doc.autoTable({
+                head: [headers],
+                body: data,
+                startY: 30,
+                styles: { fontSize: 10 }
+            });
+            doc.save(title + ".pdf");
+        }
+        
+        function populateGroupSelectors() {
+            const projectTeamSelect = document.getElementById('project-team');
+            const taskTeamSelect = document.getElementById('task-team');
+            const projectList = document.getElementById('project-team-list');
+            const taskList = document.getElementById('task-team-list');
+
+            window.projectTeam = [];
+            window.taskTeam = [];
+
+            function createBadge(name, id, listContainer, teamArray) {
+                if (teamArray.includes(id)) return;
+                const badge = document.createElement('span');
+                badge.className = 'badge badge-primary';
+                badge.textContent = name + ' ×';
+                badge.style.cursor = 'pointer';
+                badge.style.marginRight = '5px';
+                badge.onclick = () => {
+                    listContainer.removeChild(badge);
+                    const idx = teamArray.indexOf(id);
+                    if (idx !== -1) teamArray.splice(idx, 1);
+                };
+                listContainer.appendChild(badge);
+                teamArray.push(id);
+            }
+
+            // Fill selects
+            projectTeamSelect.innerHTML = '<option value="">Zgjidh punonjësin</option>';
+            taskTeamSelect.innerHTML = '<option value="">Zgjidh punonjësin</option>';
+            employees.filter(e => e.status === 'active').forEach(emp => {
+                const opt1 = document.createElement('option');
+                opt1.value = emp.id;
+                opt1.textContent = emp.name;
+                const opt2 = opt1.cloneNode(true);
+                projectTeamSelect.appendChild(opt1);
+                taskTeamSelect.appendChild(opt2);
+            });
+
+            projectTeamSelect.onchange = () => {
+                const id = parseInt(projectTeamSelect.value);
+                if (!id) return;
+                const emp = employees.find(e => e.id === id);
+                if (emp) createBadge(emp.name, emp.id, projectList, projectTeam);
+                projectTeamSelect.value = '';
+            };
+
+            taskTeamSelect.onchange = () => {
+                const id = parseInt(taskTeamSelect.value);
+                if (!id) return;
+                const emp = employees.find(e => e.id === id);
+                if (emp) createBadge(emp.name, emp.id, taskList, taskTeam);
+                taskTeamSelect.value = '';
+            };
+        }
+        
+        // Delete data
+        function deleteData(type, id) {
+            switch(type) {
+                case 'task':
+                    tasks = tasks.filter(t => t.id !== id);
+                    if (currentSection === 'tasks') {
+                        loadAllTasks();
+                    } else {
+                        loadRecentTasks();
+                    }
+                    break;
+                    
+                case 'project':
+                    // Also delete tasks associated with this project
+                    tasks = tasks.filter(t => t.projectId !== id);
+                    projects = projects.filter(p => p.id !== id);
+                    if (currentSection === 'projects') {
+                        loadAllProjects();
+                    } else {
+                        loadActiveProjects();
+                    }
+                    break;
+                    
+                case 'client':
+                    // Also delete projects and tasks associated with this client
+                    const clientProjects = projects.filter(p => p.clientId === id).map(p => p.id);
+                    tasks = tasks.filter(t => !clientProjects.includes(t.projectId));
+                    projects = projects.filter(p => p.clientId !== id);
+                    clients = clients.filter(c => c.id !== id);
+                    loadAllClients();
+                    if (currentSection === 'projects') {
+                        loadAllProjects();
+                    } else {
+                        loadActiveProjects();
+                    }
+                    break;
+                    
+                case 'employee':
+                    // Also update projects and tasks associated with this employee
+                    projects.forEach(p => {
+                        if (p.managerId === id) {
+                            p.managerId = null;
+                        }
+                    });
+                    tasks.forEach(t => {
+                        if (t.employeeId === id) {
+                            t.employeeId = null;
+                        }
+                    });
+                    employees = employees.filter(e => e.id !== id);
+                    loadAllEmployees();
+                    if (currentSection === 'projects') {
+                        loadAllProjects();
+                    } else if (currentSection === 'tasks') {
+                        loadAllTasks();
+                    }
+                    break;
+                    
+                case 'event':
+                    events = events.filter(e => e.id !== id);
+                    generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+                    break;
+            }
+            
+            // Update dashboard stats
+            updateDashboardStats();
+            loadTaskNotifications();
+        }
+        
         // Expose functions to global scope for inline event handlers
         window.viewData = viewData;
         window.editData = editData;
         window.deleteData = deleteData;
+        window.applyProjectFilters = applyProjectFilters;
+        window.exportProjectsToExcel = exportProjectsToExcel;
+        window.filterTable = filterTable;
+        window.exportTableToPDF = exportTableToPDF;
         
         // Initialize the app
         document.addEventListener('DOMContentLoaded', init);
+    </script>
     
-function applyProjectFilters() {
-    const nameFilter = document.getElementById('projectNameFilter').value.toLowerCase();
-    const employeeId = parseInt(document.getElementById('employeeFilter').value);
-    const rows = document.querySelectorAll('#projects-table tbody tr');
-    rows.forEach(row => {
-        const projectName = row.children[0].textContent.toLowerCase();
-        const teamCount = parseInt(row.children[8]?.textContent || 0);
-        let match = true;
-        if (nameFilter && !projectName.includes(nameFilter)) match = false;
-        if (employeeId && (!row.dataset.team || !row.dataset.team.includes(String(employeeId)))) match = false;
-        row.style.display = match ? '' : 'none';
-    });
-}
-
-function exportProjectsToExcel() {
-    let table = document.getElementById('projects-table');
-    let wb = XLSX.utils.table_to_book(table, { sheet: "Projekte" });
-    XLSX.writeFile(wb, "Projekte.xlsx");
-}
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const filter = document.getElementById('employeeFilter');
-    employees.forEach(e => {
-        const opt = document.createElement('option');
-        opt.value = e.id;
-        opt.textContent = e.name;
-        filter.appendChild(opt);
-    });
-});
-
-</script>
-
-<script>
-document.querySelectorAll('.tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
-        tab.classList.add('active');
-        const target = tab.getAttribute('data-tab');
-        document.getElementById(target).classList.add('active');
-    });
-});
-
-function renderProjects() {
-    const projects = JSON.parse(localStorage.getItem('projects') || '[]');
-    const tables = {
-        'projects-table': 'all',
-        'projects-phase-Prospekt': 'Prospekt',
-        'projects-phase-Kualifikim': 'Kualifikim',
-        'projects-phase-Propozim': 'Propozim',
-        'projects-phase-Negociim': 'Negociim',
-        'projects-phase-Mbyllur-Fituar': 'Mbyllur (Fituar)',
-        'projects-phase-Mbyllur-Humbur': 'Mbyllur (Humbur)'
-    };
-
-    const phases = ["Prospekt", "Kualifikim", "Propozim", "Negociim", "Mbyllur (Fituar)", "Mbyllur (Humbur)"];
-
-    for (const [tableId, phase] of Object.entries(tables)) {
-        const tbody = document.querySelector(`#${tableId} tbody`);
-        if (!tbody) continue;
-        tbody.innerHTML = '';
-        projects.forEach((project, index) => {
-            if (phase !== 'all' && project.phase !== phase) return;
-            const tr = document.createElement('tr');
-
-            const phaseDropdown = `
-                <select onchange="updatePhase(${project.id}, this.value)">
-                    ${phases.map(p => `<option value="${p}" ${p === project.phase ? 'selected' : ''}>${p}</option>`).join('')}
-                </select>`;
-
-            tr.innerHTML = `
-                <td>${project.name}</td>
-                <td>${project.clientName || ''}</td>
-                <td>${project.startDate || ''}</td>
-                <td>${project.endDate || ''}</td>
-                <td>${project.priority || ''}</td>
-                <td>${phaseDropdown}</td>
-                <td>${project.status || ''}</td>
-                <td>${project.value || ''}</td>
-                <td><button class="btn btn-sm btn-primary">Shiko</button></td>
-            `;
-            tbody.appendChild(tr);
-        });
+    <script>
+    function autoBackupAt22() {
+        const now = new Date();
+        const hour = now.getHours();
+        const minute = now.getMinutes();
+        if (hour === 22 && minute === 0) triggerBackup();
     }
-}
-
-function updatePhase(projectId, newPhase) {
-    const projects = JSON.parse(localStorage.getItem('projects') || '[]');
-    const index = projects.findIndex(p => p.id === projectId);
-    if (index !== -1) {
-        projects[index].phase = newPhase;
-        localStorage.setItem('projects', JSON.stringify(projects));
-        renderProjects();
-    }
-}
-
-window.addEventListener('load', renderProjects);
-</script>
-
-
-<script>
-function autoBackupAt22() {
-    const now = new Date();
-    const hour = now.getHours();
-    const minute = now.getMinutes();
-    if (hour === 22 && minute === 0) {
+    setInterval(autoBackupAt22, 60000);
+    
+    function triggerBackup() {
         const data = {
-            projects: localStorage.getItem('projects'),
-            tasks: localStorage.getItem('tasks'),
-            clients: localStorage.getItem('clients'),
-            employees: localStorage.getItem('employees')
+            tasks,
+            projects,
+            clients,
+            employees,
+            events
         };
-        const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
-        const dateStr = now.toISOString().split('T')[0];
+        const dataStr = JSON.stringify(data);
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        const dateStr = new Date().toISOString().split('T')[0];
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
         a.download = 'backup_CSP_TaskPRO_' + dateStr + '.json';
@@ -3493,98 +3521,10 @@ function autoBackupAt22() {
         a.click();
         document.body.removeChild(a);
     }
-}
-setInterval(autoBackupAt22, 60000); // kontroll çdo 60 sekonda
-</script>
-
-
-<script>
-document.querySelectorAll('.tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
-        tab.classList.add('active');
-        const target = tab.getAttribute('data-tab');
-        document.getElementById(target).classList.add('active');
-    });
-});
-
-function renderProjects() {
-    const projects = JSON.parse(localStorage.getItem('projects') || '[]');
-    const phases = ["Prospekt", "Kualifikim", "Propozim", "Negociim", "Mbyllur (Fituar)", "Mbyllur (Humbur)"];
-    const allTables = document.querySelectorAll("table[id^='projects']");
-
-    allTables.forEach(table => {
-        const tbody = table.querySelector("tbody");
-        tbody.innerHTML = '';
-    });
-
-    projects.forEach(project => {
-        const tr = document.createElement('tr');
-        const dropdown = `
-            <select onchange="updatePhase(${project.id}, this.value)">
-                ${phases.map(p => `<option value="${p}" ${p === project.phase ? 'selected' : ''}>${p}</option>`).join('')}
-            </select>`;
-
-        tr.innerHTML = `
-            <td>${project.name}</td>
-            <td>${project.clientName || ''}</td>
-            <td>${project.startDate || ''}</td>
-            <td>${project.endDate || ''}</td>
-            <td>${project.priority || ''}</td>
-            <td>${dropdown}</td>
-            <td>${project.status || ''}</td>
-            <td>${project.value || ''}</td>
-            <td><button class="btn btn-sm btn-primary">Shiko</button></td>`;
-
-        // always add to "all"
-        document.querySelector("#projects-table tbody").appendChild(tr.cloneNode(true));
-        // add to its phase table
-        const phaseId = project.phase === "Mbyllur (Fituar)" ? "Mbyllur-Fituar" :
-                        project.phase === "Mbyllur (Humbur)" ? "Mbyllur-Humbur" : project.phase;
-        const specificTable = document.querySelector(`#projects-phase-${phaseId} tbody`);
-        if (specificTable) specificTable.appendChild(tr);
-    });
-}
-
-function updatePhase(projectId, newPhase) {
-    const projects = JSON.parse(localStorage.getItem('projects') || '[]');
-    const index = projects.findIndex(p => p.id === projectId);
-    if (index !== -1) {
-        projects[index].phase = newPhase;
-        localStorage.setItem('projects', JSON.stringify(projects));
-        renderProjects();
-    }
-}
-
-function autoBackupAt22() {
-    const now = new Date();
-    const hour = now.getHours();
-    const minute = now.getMinutes();
-    if (hour === 22 && minute === 0) triggerBackup();
-}
-setInterval(autoBackupAt22, 60000);
-
-function triggerBackup() {
-    const data = {
-        projects: localStorage.getItem('projects'),
-        tasks: localStorage.getItem('tasks'),
-        clients: localStorage.getItem('clients'),
-        employees: localStorage.getItem('employees')
-    };
-    const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
-    const dateStr = new Date().toISOString().split('T')[0];
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'backup_CSP_TaskPRO_' + dateStr + '.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-}
-</script>
-
-<div style="text-align:right; padding: 1rem;">
-    <button class="btn btn-warning" onclick="triggerBackup()">Backup Manual</button>
-</div>
+    </script>
+    
+    <div style="text-align:right; padding: 1rem;">
+        <button class="btn btn-warning" onclick="triggerBackup()">Backup Manual</button>
+    </div>
 </body>
 </html>
